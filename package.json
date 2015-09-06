@@ -1,0 +1,19 @@
+
+{
+  "name": "wait-notify-police",
+  "productName": "Wait-Notify Police",
+  "version": "0.1.0",
+  "author": "Nitin Mukesh Tiwari <nmtiwari@iastate.edu>",
+  "description": "Checks and warns against improper usage of wait-notify features",
+  "main": "main.html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/candoia/cwait-notify-police"
+  },
+  "icon": {
+  "type": "fa",
+  "name": "pie-chart"
+  }
+}
+
+

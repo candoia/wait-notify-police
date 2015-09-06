@@ -1,0 +1,39 @@
+p: Project = input;
+#UnconditionalWaits : output sum of int;
+out : output sum[string] of int;
+insideWhile := false;
+
+counts := 0;
+
+visit(input, visitor {
+    before node: CodeRepository -> {
+		# only look at the latest snapshot
+		# and only include Java files
+		snapshot := getsnapshot(node, "SOURCE_JAVA_JLS");
+		foreach (i: int; def(snapshot[i]))
+			visit(snapshot[i]);
+		stop;
+	}
+	before node: Statement -> {
+	    if (node.kind == StatementKind.WHILE) {
+	        foreach (i: int; def(node.statements[i])) {
+	            if (node.statements[i].kind == StatementKind.SYNCHRONIZED) {
+	                sync_stmt := node.statements[i];
+	                foreach (j: int; def(sync_stmt.statements[j])) {
+	                    if (sync_stmt.statements[j].kind == StatementKind.EXPRESSION) {
+	                        if (def(sync_stmt.statements[j].expression)) {
+	                            expr := sync_stmt.statements[j].expression;
+	                            if ((expr.kind == ExpressionKind.METHODCALL) &&
+	                                expr.method == "wait")
+	                                counts++;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+	    }
+	}
+});
+
+#if (counts > 0)
+    out[input.project_url] << counts;
