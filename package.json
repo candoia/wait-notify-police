@@ -1,4 +1,3 @@
-
 {
   "name": "wait-notify-police",
   "productName": "Wait-Notify Police",
@@ -8,12 +7,10 @@
   "main": "main.html",
   "repository": {
     "type": "git",
-    "url": "https://github.com/candoia/cwait-notify-police"
+    "url": "https://github.com/candoia/wait-notify-police"
   },
   "icon": {
-  "type": "fa",
-  "name": "pie-chart"
+    "type": "fa",
+    "name": "hand-stop-o"
   }
 }
-
-
